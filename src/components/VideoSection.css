@@ -1,0 +1,84 @@
+.video-sec {
+  padding: 60px 24px 80px;
+  background: transparent;
+  position: relative;
+}
+
+.video-sec::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(156, 127, 161, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.video-sec__heading {
+  font-family: var(--font-script);
+  font-size: 54px;
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  background: linear-gradient(135deg, #7d5e82 0%, #c4a6cd 40%, #e6c885 60%, #7d5e82 100%);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: videoHeadShimmer 5s linear infinite;
+}
+
+.invitation-open-section.is-opened .video-sec__heading,
+.video-sec.is-visible .video-sec__heading {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes videoHeadShimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 300% center; }
+}
+
+.video-sec__wrap {
+  border-radius: 28px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  position: relative;
+  z-index: 1;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  opacity: 0;
+  transform: scale(0.92) translateY(30px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s, box-shadow 0.3s ease;
+  animation: videoAura 4s ease-in-out infinite alternate;
+}
+
+.invitation-open-section.is-opened .video-sec__wrap,
+.video-sec.is-visible .video-sec__wrap {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+@keyframes videoAura {
+  0%   {
+    box-shadow: 0 16px 56px rgba(156, 127, 161, 0.25), 0 0 15px rgba(226, 168, 207, 0.3);
+    border-color: rgba(255,255,255,0.5);
+  }
+  100% {
+    box-shadow: 0 28px 72px rgba(156, 127, 161, 0.48), 0 0 40px rgba(230, 200, 133, 0.6);
+    border-color: rgba(230, 200, 133, 0.7);
+  }
+}
+
+.video-sec__wrap:hover {
+  transform: translateY(-8px) scale(1.012);
+  box-shadow: 0 36px 80px rgba(156, 127, 161, 0.45), 0 0 50px rgba(230, 200, 133, 0.7);
+}
+
+.video-sec__frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}

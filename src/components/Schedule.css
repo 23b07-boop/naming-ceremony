@@ -1,0 +1,282 @@
+.schedule {
+  position: relative;
+  padding: 60px 0 80px;
+  background: transparent;
+  overflow: hidden;
+}
+
+/* ── Decorative Background Elements ── */
+.schedule__decor {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.schedule__decor--top-left {
+  top: 0;
+  left: 0;
+  width: 140px;
+  height: 140px;
+}
+
+.schedule__decor--bottom-right {
+  bottom: 0;
+  right: 0;
+  width: 180px;
+  height: 220px;
+}
+
+.schedule__flower {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.schedule__flower--top-right {
+  top: 40px;
+  right: 80px;
+}
+
+.schedule__flower--bottom-left {
+  bottom: 60px;
+  left: 60px;
+}
+
+.schedule__flower--bottom-right {
+  bottom: 80px;
+  right: 180px;
+}
+
+.schedule__bg-star {
+  position: absolute;
+  color: #cba8d8;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.schedule__bg-star--1 {
+  bottom: 50px;
+  right: 360px;
+  width: 24px;
+  height: 24px;
+}
+
+.schedule__bg-star--2 {
+  top: 120px;
+  right: 300px;
+  width: 28px;
+  height: 28px;
+}
+
+/* ── Section Title with Shimmer ── */
+.schedule__title {
+  font-family: var(--font-script);
+  font-size: 64px;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  background: linear-gradient(135deg, #a07db5 0%, #e6c885 40%, #c4a6cd 70%, #a07db5 100%);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: scheduleTitleShimmer 5s linear infinite;
+}
+
+.invitation-open-section.is-opened .schedule__title,
+.schedule.is-visible .schedule__title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes scheduleTitleShimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 300% center; }
+}
+
+/* ── Carousel Slider & Peek Effect ── */
+.schedule__carousel-wrapper {
+  width: 100%;
+  overflow: hidden;
+  padding: 10px 0 20px;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(30px) scale(0.96);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+}
+
+.invitation-open-section.is-opened .schedule__carousel-wrapper,
+.schedule.is-visible .schedule__carousel-wrapper {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.schedule__slider {
+  display: flex;
+  gap: 28px;
+  padding-left: 120px;
+  padding-right: 120px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  align-items: center;
+}
+
+@media (max-width: 680px) {
+  .schedule__slider {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+.schedule__slider::-webkit-scrollbar {
+  display: none;
+}
+
+.schedule__slide {
+  flex: 0 0 680px;
+  max-width: 80vw;
+  scroll-snap-align: center;
+  display: flex;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+  transform: scale(0.88) rotateY(6deg);
+  opacity: 0.6;
+  filter: blur(0.5px);
+}
+
+.schedule__slide.is-active {
+  transform: scale(1.0) rotateY(0deg);
+  opacity: 1;
+  z-index: 5;
+  filter: blur(0);
+}
+
+/* Ensure flip-card-inner fills the slide correctly */
+.schedule__slide .flip-card-inner {
+  width: 100%;
+  height: 340px;
+}
+
+.schedule__slide .flip-card-perspective {
+  border-radius: 28px;
+}
+
+/* ── Light Purple Card ── */
+.schedule__card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #a07db5; /* Light Purple */
+  border-radius: 28px;
+  padding: 56px 48px 52px;
+  text-align: center;
+  box-shadow: 0 12px 36px rgba(140, 110, 170, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  box-sizing: border-box;
+}
+
+.schedule__slide.is-active .schedule__card {
+  box-shadow: 0 20px 60px rgba(140, 110, 170, 0.42), 0 0 32px rgba(255, 255, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.85);
+}
+
+/* Star Watermark on card */
+.schedule__card-star {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.25);
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+}
+
+.schedule__card-star--left {
+  left: 60px;
+  bottom: 70px;
+}
+
+.schedule__card-star--right {
+  right: 70px;
+  top: 70px;
+}
+
+/* Pink Bow inside card */
+.schedule__bow-img {
+  width: 105px;
+  height: auto;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
+  animation: bowSway 4s ease-in-out infinite, bowBreathe 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes bowSway {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%       { transform: translateY(-6px) rotate(3deg); }
+}
+
+@keyframes bowBreathe {
+  0%   { filter: drop-shadow(0 4px 10px rgba(0,0,0,0.1)); }
+  100% { filter: drop-shadow(0 6px 18px rgba(156,127,161,0.5)); }
+}
+
+/* Text inside card */
+.schedule__label {
+  font-family: var(--font-script);
+  font-size: 46px;
+  font-weight: 400;
+  color: #ffffff;
+  margin-bottom: 8px;
+  line-height: 1.1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.schedule__time {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: 0.5px;
+}
+
+/* ── Dots ── */
+.schedule__dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.schedule__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #a07db5;
+  opacity: 0.35;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.schedule__dot.active {
+  opacity: 1;
+  background: #a07db5;
+  transform: scale(1.5);
+  box-shadow: 0 0 8px rgba(160, 125, 181, 0.6);
+}

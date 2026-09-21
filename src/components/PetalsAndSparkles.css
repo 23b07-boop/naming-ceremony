@@ -1,0 +1,226 @@
+.petals-sparkles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 99;
+  overflow: hidden;
+}
+
+/* Background Large Animated Floating Flowers */
+.floating-flower--large {
+  position: absolute;
+  top: -60px;
+  animation: floatLargeFlower 16s ease-in-out infinite;
+  opacity: 0.88;
+  filter: drop-shadow(0 6px 12px rgba(184, 152, 191, 0.35));
+}
+
+.floating-flower:nth-child(1)  { left: 6%;  animation-duration: 18s; animation-delay: 0s; }
+.floating-flower:nth-child(2)  { left: 18%; animation-duration: 15s; animation-delay: 2.5s; }
+.floating-flower:nth-child(3)  { left: 32%; animation-duration: 20s; animation-delay: 1.2s; }
+.floating-flower:nth-child(4)  { left: 48%; animation-duration: 17s; animation-delay: 4.8s; }
+.floating-flower:nth-child(5)  { left: 62%; animation-duration: 19s; animation-delay: 0.8s; }
+.floating-flower:nth-child(6)  { left: 75%; animation-duration: 16s; animation-delay: 3.2s; }
+.floating-flower:nth-child(7)  { left: 88%; animation-duration: 21s; animation-delay: 1.8s; }
+.floating-flower:nth-child(8)  { left: 24%; animation-duration: 14s; animation-delay: 5.5s; }
+.floating-flower:nth-child(9)  { left: 54%; animation-duration: 17.5s; animation-delay: 6.2s; }
+.floating-flower:nth-child(10) { left: 82%; animation-duration: 15.5s; animation-delay: 3.5s; }
+
+@keyframes floatLargeFlower {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(0.95);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.92;
+    transform: translateY(12vh) rotate(40deg) scale(1.1);
+  }
+  88% {
+    opacity: 0.92;
+    transform: translateY(92vh) rotate(320deg) scale(1.05);
+  }
+  100% {
+    transform: translateY(106vh) rotate(360deg) scale(0.9);
+    opacity: 0;
+  }
+}
+
+/* Floating Rose Petals */
+.floating-petal {
+  position: absolute;
+  top: -40px;
+  animation: floatPetal 12s linear infinite;
+  opacity: 0.8;
+}
+
+.floating-petal:nth-child(11) { left: 5%;  animation-duration: 14s; animation-delay: 0s; }
+.floating-petal:nth-child(12) { left: 15%; animation-duration: 11s; animation-delay: 2s; }
+.floating-petal:nth-child(13) { left: 28%; animation-duration: 16s; animation-delay: 1s; }
+.floating-petal:nth-child(14) { left: 42%; animation-duration: 13s; animation-delay: 4s; }
+.floating-petal:nth-child(15) { left: 55%; animation-duration: 15s; animation-delay: 0.5s; }
+.floating-petal:nth-child(16) { left: 68%; animation-duration: 12s; animation-delay: 3s; }
+.floating-petal:nth-child(17) { left: 82%; animation-duration: 17s; animation-delay: 1.5s; }
+.floating-petal:nth-child(18) { left: 92%; animation-duration: 10s; animation-delay: 5s; }
+.floating-petal:nth-child(19) { left: 22%; animation-duration: 13.5s; animation-delay: 6s; }
+.floating-petal:nth-child(20) { left: 48%; animation-duration: 11.5s; animation-delay: 2.5s; }
+.floating-petal:nth-child(21) { left: 75%; animation-duration: 14.5s; animation-delay: 4.5s; }
+.floating-petal:nth-child(22) { left: 88%; animation-duration: 12.5s; animation-delay: 0.8s; }
+
+@keyframes floatPetal {
+  0% {
+    transform: translateY(0) rotate(0deg) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.85;
+  }
+  90% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(105vh) rotate(360deg) translateX(60px);
+    opacity: 0;
+  }
+}
+
+/* Floating Golden Sparkles */
+.floating-sparkle {
+  position: absolute;
+  animation: sparkleTwinkle 4s ease-in-out infinite alternate;
+}
+
+.floating-sparkle:nth-child(23) { top: 12%; left: 8%;  animation-delay: 0s; }
+.floating-sparkle:nth-child(24) { top: 25%; left: 88%; animation-delay: 1.2s; }
+.floating-sparkle:nth-child(25) { top: 40%; left: 14%; animation-delay: 2.1s; }
+.floating-sparkle:nth-child(26) { top: 58%; left: 91%; animation-delay: 0.8s; }
+.floating-sparkle:nth-child(27) { top: 72%; left: 6%;  animation-delay: 1.7s; }
+.floating-sparkle:nth-child(28) { top: 85%; left: 82%; animation-delay: 2.5s; }
+
+@keyframes sparkleTwinkle {
+  0% {
+    transform: scale(0.6) rotate(0deg);
+    opacity: 0.2;
+    filter: drop-shadow(0 0 2px rgba(212, 175, 55, 0.4));
+  }
+  50% {
+    transform: scale(1.2) rotate(45deg);
+    opacity: 0.9;
+    filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.9));
+  }
+  100% {
+    transform: scale(0.6) rotate(90deg);
+    opacity: 0.3;
+    filter: drop-shadow(0 0 2px rgba(212, 175, 55, 0.4));
+  }
+}
+
+/* Interactive Cursor Sparkle Trail */
+.cursor-sparkle {
+  position: fixed;
+  pointer-events: none;
+  font-size: 14px;
+  transform: translate(-50%, -50%);
+  animation: cursorSparkleFade 0.8s ease-out forwards;
+  z-index: 10000;
+  user-select: none;
+}
+
+@keyframes cursorSparkleFade {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -15px) scale(0.3) rotate(45deg);
+  }
+}
+
+/* Click Burst Petals */
+.click-burst-petal {
+  position: fixed;
+  pointer-events: none;
+  font-size: 16px;
+  transform: translate(-50%, -50%);
+  animation: clickBurstFade 0.9s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+  z-index: 10000;
+  user-select: none;
+}
+
+@keyframes clickBurstFade {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--tx, 0px)), calc(-50% + var(--ty, -40px))) scale(1.2) rotate(90deg);
+  }
+}
+
+/* Floating Butterflies (Positioned strictly on right side & gentle graceful flutter) */
+.floating-butterfly {
+  position: absolute;
+  top: -50px;
+  pointer-events: none;
+  z-index: 100;
+  animation: floatButterfly 18s ease-in-out infinite;
+  filter: drop-shadow(0 4px 10px rgba(184, 152, 191, 0.45));
+  opacity: 0.85;
+}
+
+.floating-butterfly img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: butterflyFlutter 0.6s ease-in-out infinite alternate;
+}
+
+.floating-butterfly.butterfly-0 { left: 68%; animation-duration: 20s; animation-delay: 0s; width: 34px; height: 34px; }
+.floating-butterfly.butterfly-1 { left: 84%; animation-duration: 16s; animation-delay: 3.5s; width: 28px; height: 28px; }
+.floating-butterfly.butterfly-2 { left: 76%; animation-duration: 22s; animation-delay: 7s; width: 32px; height: 32px; }
+.floating-butterfly.butterfly-3 { left: 92%; animation-duration: 18s; animation-delay: 1.8s; width: 30px; height: 30px; }
+.floating-butterfly.butterfly-4 { left: 62%; animation-duration: 24s; animation-delay: 9.5s; width: 26px; height: 26px; }
+
+@keyframes floatButterfly {
+  0% {
+    transform: translateY(0) translateX(0) rotate(5deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+    transform: translateY(16vh) translateX(-18px) rotate(18deg);
+  }
+  50% {
+    opacity: 0.92;
+    transform: translateY(52vh) translateX(24px) rotate(-12deg);
+  }
+  85% {
+    opacity: 0.9;
+    transform: translateY(86vh) translateX(-16px) rotate(22deg);
+  }
+  100% {
+    transform: translateY(106vh) translateX(12px) rotate(0deg);
+    opacity: 0;
+  }
+}
+
+@keyframes butterflyFlutter {
+  0% {
+    transform: scaleX(1) scaleY(1);
+  }
+  100% {
+    transform: scaleX(0.55) scaleY(1.05);
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .floating-flower--large, .floating-petal, .floating-sparkle, .floating-butterfly, .cursor-sparkle, .click-burst-petal {
+    animation: none !important;
+    display: none !important;
+  }
+}

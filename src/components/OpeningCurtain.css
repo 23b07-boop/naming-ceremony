@@ -1,0 +1,193 @@
+.opening-curtain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: rgba(26, 36, 30, 0.4);
+  backdrop-filter: blur(8px);
+  transition: opacity 0.6s ease 1s, visibility 0.6s ease 1s;
+}
+
+.opening-curtain-overlay.is-opening {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Left & Right Sliding Doors */
+.curtain-door {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50vw;
+  background: linear-gradient(135deg, #c4a6cd 0%, #a584ab 50%, #7d5e82 100%);
+  box-shadow: 0 0 35px rgba(0, 0, 0, 0.35);
+  transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+  z-index: 10001;
+}
+
+.curtain-left {
+  left: 0;
+  transform: translateX(0);
+}
+
+.opening-curtain-overlay.is-opening .curtain-left {
+  transform: translateX(-100%);
+}
+
+.curtain-right {
+  right: 0;
+  transform: translateX(0);
+}
+
+.opening-curtain-overlay.is-opening .curtain-right {
+  transform: translateX(100%);
+}
+
+.curtain-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.18) 2px, transparent 2px);
+  background-size: 28px 28px;
+}
+
+.curtain-gold-trim {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: linear-gradient(to bottom, #d4af37, #fff8dc, #d4af37);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.7);
+}
+
+.curtain-left .curtain-gold-trim { right: 0; }
+.curtain-right .curtain-gold-trim { left: 0; }
+
+/* ── Interactive 3D Envelope Card ── */
+.envelope-wrapper {
+  position: relative;
+  z-index: 10002;
+  perspective: 1000px;
+  animation: envelopeFloat 4s ease-in-out infinite alternate;
+}
+
+@keyframes envelopeFloat {
+  0% { transform: translateY(0) rotate(-0.5deg); }
+  100% { transform: translateY(-10px) rotate(0.5deg); }
+}
+
+.envelope-card {
+  width: 90vw;
+  max-width: 440px;
+  background: #fbf9f6;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 25px rgba(212, 175, 55, 0.35);
+  border: 2px solid rgba(212, 175, 55, 0.4);
+  padding: 30px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+}
+
+.opening-curtain-overlay.is-opening .envelope-card {
+  transform: translateY(-80px) scale(0.9) rotateX(15deg);
+  opacity: 0;
+}
+
+.envelope-top-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  pointer-events: none;
+}
+
+.envelope-teddy-badge {
+  width: 100px;
+  height: 100px;
+  margin: 10px auto 16px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #d4af37;
+  box-shadow: 0 6px 18px rgba(110, 89, 117, 0.25);
+  animation: pulseBadge 3s ease-in-out infinite alternate;
+}
+
+@keyframes pulseBadge {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); }
+}
+
+.envelope-teddy-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.envelope-sub {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  color: #6e5975;
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+
+.envelope-title {
+  font-family: 'Alex Brush', cursive;
+  font-size: 38px;
+  color: #3c2d42;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.envelope-date {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #846589;
+  margin-bottom: 24px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.envelope-open-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #9c7fa1 0%, #6e5274 100%);
+  color: #ffffff;
+  border: 2px solid #d4af37;
+  border-radius: 50px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(110, 89, 117, 0.35), 0 0 15px rgba(212, 175, 55, 0.4);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: glowBtn 2s ease-in-out infinite alternate;
+}
+
+@keyframes glowBtn {
+  0% { box-shadow: 0 8px 24px rgba(110, 89, 117, 0.35), 0 0 10px rgba(212, 175, 55, 0.3); }
+  100% { box-shadow: 0 12px 32px rgba(110, 89, 117, 0.5), 0 0 22px rgba(212, 175, 55, 0.7); }
+}
+
+.envelope-open-btn:hover {
+  transform: translateY(-3px) scale(1.04);
+  background: linear-gradient(135deg, #a88cb0 0%, #7d5e82 100%);
+}
+
+.envelope-open-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.wax-seal {
+  font-size: 20px;
+}
+

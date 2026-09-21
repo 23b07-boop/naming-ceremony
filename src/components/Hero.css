@@ -1,0 +1,428 @@
+.hero {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px 80px;
+  min-height: calc(100vh - 70px);
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 30%, #f9f4fa 0%, #f2e6f5 50%, #ece0f0 100%);
+}
+
+/* ── Floating Background Clouds (Background Motion) ── */
+.hero__cloud {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  animation: floatCloud 12s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.hero__cloud--left {
+  top: 15%;
+  left: 5%;
+  width: 240px;
+}
+
+.hero__cloud--right {
+  bottom: 20%;
+  right: 5%;
+  width: 260px;
+  animation-delay: 4s;
+}
+
+@keyframes floatCloud {
+  0% { transform: translateX(0) translateY(0); }
+  100% { transform: translateX(25px) translateY(-12px); }
+}
+
+/* ── Floral background decor ── */
+.hero__decor {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  animation: floatSway 7s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.hero__decor--top-left {
+  top: 0;
+  left: 0;
+  width: 230px;
+  height: 310px;
+}
+
+.hero__decor--bottom-left {
+  bottom: 0;
+  left: 0;
+  width: 230px;
+  height: 350px;
+}
+
+.hero__decor--top-right {
+  top: 0;
+  right: 0;
+  width: 230px;
+  height: 270px;
+  animation-delay: 1.5s;
+}
+
+.hero__decor--bottom-right {
+  bottom: 0;
+  right: 0;
+  width: 230px;
+  height: 290px;
+  animation-delay: 2.5s;
+}
+
+@keyframes floatSway {
+  0% { transform: rotate(0deg) scale(1); }
+  100% { transform: rotate(4deg) scale(1.03); }
+}
+
+/* ── Floating background stars ── */
+.hero__star {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  animation: pulseStar 4s ease-in-out infinite alternate;
+}
+
+.hero__star--1 { top: 12%; left: 16%; width: 28px; height: 28px; animation-delay: 0s; }
+.hero__star--2 { top: 20%; right: 18%; width: 34px; height: 34px; animation-delay: 1s; }
+.hero__star--3 { bottom: 25%; left: 14%; width: 30px; height: 30px; animation-delay: 2s; }
+.hero__star--4 { bottom: 18%; right: 16%; width: 26px; height: 26px; animation-delay: 1.5s; }
+
+@keyframes pulseStar {
+  0% { transform: scale(0.8) rotate(0deg); opacity: 0.6; }
+  100% { transform: scale(1.2) rotate(25deg); opacity: 0.95; }
+}
+
+/* ── 3D Card Flip Perspective Container ── */
+.hero__card-container {
+  perspective: 1200px;
+  width: 100%;
+  max-width: 440px;
+  position: relative;
+  z-index: 2;
+  margin-top: 20px;
+}
+
+/* Gentle Zoom-In is now handled globally in App.css */
+
+.hero__card-3d-wrapper {
+  position: relative;
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero__card-3d-wrapper.is-flipped {
+  transform: rotateY(180deg);
+}
+
+/* ── Central Light Purple Arch Card (Front & Back Faces) ── */
+.hero__card {
+  width: 100%;
+  background: #9c7fa1; /* Light Purple / Lavender */
+  border-radius: 200px 200px 0 0;
+  padding: 44px 36px 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
+  box-shadow: 0 20px 60px rgba(110, 89, 117, 0.32), 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.invitation-open-section.is-opened .hero__card,
+.hero__card.is-visible {
+  animation: heroCardEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes heroCardEntrance {
+  0% {
+    opacity: 0;
+    transform: perspective(1000px) rotateX(12deg) scale(0.92) translateY(40px);
+    box-shadow: 0 8px 24px rgba(110, 89, 117, 0.1);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1000px) rotateX(0deg) scale(1) translateY(0);
+    box-shadow: 0 20px 60px rgba(110, 89, 117, 0.32), 0 0 25px rgba(230, 200, 133, 0.35);
+  }
+}
+
+.hero__card-face--front {
+  position: relative;
+}
+
+.hero__card-face--back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  transform: rotateY(180deg);
+  background: linear-gradient(160deg, #9c7fa1 0%, #86688b 100%);
+  justify-content: center;
+}
+
+/* 3D Flip Toggle Button */
+.hero__flip-toggle-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
+  z-index: 20;
+}
+
+.hero__flip-toggle-btn:hover {
+  background: #ffffff;
+  color: #7d5e82;
+  transform: scale(1.06);
+}
+
+/* Back face content */
+.hero__back-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding-top: 30px;
+}
+
+.hero__back-sparkle {
+  animation: sparkleRotate 4s linear infinite;
+}
+
+.hero__back-title {
+  font-family: 'Alex Brush', cursive;
+  font-size: 48px;
+  color: #ffffff;
+}
+
+.hero__back-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-style: italic;
+  color: #f7eff9;
+  line-height: 1.5;
+  padding: 0 10px;
+}
+
+.hero__back-divider {
+  width: 80px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 2px;
+}
+
+.hero__back-info {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 12px 20px;
+  border-radius: 14px;
+}
+
+.hero__back-family {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #fce4f3;
+  margin-top: 8px;
+}
+
+/* ── Baby Portrait Container with Pink/Lavender Bow ── */
+.hero__portrait-container {
+  position: relative;
+  margin-top: 4px;
+  margin-bottom: 24px;
+  transition: transform 0.25s ease;
+}
+
+.hero__portrait-container:hover {
+  transform: scale(1.05);
+}
+
+.hero__pink-bow {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 76px;
+  height: 52px;
+  z-index: 10;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.15));
+  animation: bowPulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes bowPulse {
+  0% { transform: translateX(-50%) scale(0.96); }
+  100% { transform: translateX(-50%) scale(1.04); }
+}
+
+.hero__portrait-ring {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 3.5px solid #ffffff;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  background: #fbf9f6;
+  transition: transform 0.2s ease;
+}
+
+.hero__portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+/* ── Invitation Typography ── */
+.hero__sup {
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #ffffff;
+  opacity: 0.95;
+  margin-bottom: 4px;
+  letter-spacing: 0.2px;
+}
+
+.hero__title {
+  font-family: 'Alex Brush', cursive;
+  font-size: 56px;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.15;
+  margin-bottom: 6px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.hero__sub {
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #ffffff;
+  opacity: 0.9;
+  margin-bottom: 28px;
+}
+
+.hero__date {
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+}
+
+.hero__venue {
+  font-family: 'Alex Brush', cursive;
+  font-size: 40px;
+  font-weight: 400;
+  color: #ffffff;
+  margin-bottom: 24px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.hero__map-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 28px;
+  border: 1.5px solid #ffffff;
+  border-radius: 30px;
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.hero__map-btn:hover {
+  background: #ffffff;
+  color: #7d5e82;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+/* ── Light Purple Animated Barbie Dolls Floating Around Card ── */
+.hero__barbie {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 16px rgba(138, 92, 156, 0.25));
+  will-change: transform;
+}
+
+.hero__barbie--left {
+  top: 25%;
+  left: calc(50% - 370px);
+  width: 140px;
+  height: 190px;
+  animation: barbieFloatLeft 5s ease-in-out infinite alternate;
+}
+
+.hero__barbie--right {
+  bottom: 22%;
+  right: calc(50% - 370px);
+  width: 140px;
+  height: 190px;
+  animation: barbieFloatRight 5.5s ease-in-out infinite alternate;
+}
+
+@keyframes barbieFloatLeft {
+  0% { transform: translateY(0px) rotate(-4deg) scale(0.98); }
+  50% { transform: translateY(-14px) rotate(3deg) scale(1.04); }
+  100% { transform: translateY(-6px) rotate(-2deg) scale(1); }
+}
+
+@keyframes barbieFloatRight {
+  0% { transform: translateY(0px) rotate(4deg) scale(0.98); }
+  50% { transform: translateY(-16px) rotate(-3deg) scale(1.04); }
+  100% { transform: translateY(-8px) rotate(2deg) scale(1); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 860px) {
+  .hero__barbie--left { left: 8px; width: 100px; height: 140px; }
+  .hero__barbie--right { right: 8px; width: 100px; height: 140px; }
+}
+
+@media (max-width: 600px) {
+  .hero { padding: 30px 16px 60px; }
+  .hero__card { max-width: 100%; border-radius: 160px 160px 0 0; padding: 36px 20px 44px; }
+  .hero__title { font-size: 44px; }
+  .hero__venue { font-size: 34px; }
+  .hero__barbie--left { top: 6%; left: 4px; width: 75px; height: 100px; }
+  .hero__barbie--right { bottom: 8%; right: 4px; width: 75px; height: 100px; }
+}

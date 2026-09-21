@@ -1,0 +1,191 @@
+/* App layout */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Desktop View Format Container — Constrains width for elegant desktop view */
+main.main-page-transition {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  animation: pageFadeMorph 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pageFadeMorph {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ROYAL INVITATION SCROLL-OPENED ANIMATIONS
+   ══════════════════════════════════════════════════════════════ */
+
+/* Every section wrapper begins in an elegant folded / unopened state */
+.invitation-open-section {
+  opacity: 0;
+  transform: perspective(1200px) rotateX(15deg) translateY(55px) scale(0.92);
+  transform-origin: 50% 0%;
+  filter: blur(2px);
+  transition:
+    opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.05s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+/* When scrolled into view, the section unfolds open like a royal invitation */
+.invitation-open-section.is-opened {
+  opacity: 1;
+  transform: perspective(1200px) rotateX(0deg) translateY(0) scale(1);
+  filter: blur(0);
+}
+
+/* Luxurious gold & white shimmer sweep when each section opens */
+.invitation-open-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 36px;
+  background: linear-gradient(115deg, transparent 15%, rgba(255, 255, 255, 0.5) 45%, rgba(230, 200, 133, 0.6) 50%, rgba(255, 255, 255, 0.5) 55%, transparent 85%);
+  background-size: 250% 100%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.invitation-open-section.is-opened::after {
+  animation: sectionOpenGlint 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+}
+
+@keyframes sectionOpenGlint {
+  0% {
+    background-position: -150% 0;
+    opacity: 0.9;
+  }
+  100% {
+    background-position: 250% 0;
+    opacity: 0;
+  }
+}
+
+/* Staggered entry for elements inside the opened section */
+.invitation-open-section.is-opened .reveal,
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1) rotateX(0deg);
+}
+
+/* Rich Scroll Reveal for individual items */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px) scale(0.95) rotateX(5deg);
+  transition:
+    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+  perspective: 1000px;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1) rotateX(0deg);
+}
+
+/* Staggered Delay Classes inside an opened section */
+.d1 { transition-delay: 0.08s; animation-delay: 0.08s; }
+.d2 { transition-delay: 0.16s; animation-delay: 0.16s; }
+.d3 { transition-delay: 0.24s; animation-delay: 0.24s; }
+.d4 { transition-delay: 0.32s; animation-delay: 0.32s; }
+.d5 { transition-delay: 0.40s; animation-delay: 0.40s; }
+.d6 { transition-delay: 0.48s; animation-delay: 0.48s; }
+.d7 { transition-delay: 0.56s; animation-delay: 0.56s; }
+.d8 { transition-delay: 0.64s; animation-delay: 0.64s; }
+
+/* Parallax Scrolling Elements */
+.parallax-bg {
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+/* Global Smooth Card Float & Glow Animations */
+@keyframes cardFloatGlow {
+  0% {
+    box-shadow: 0 16px 40px rgba(110, 89, 117, 0.18), 0 0 15px rgba(226, 168, 207, 0.2);
+  }
+  100% {
+    box-shadow: 0 24px 55px rgba(110, 89, 117, 0.28), 0 0 28px rgba(230, 200, 133, 0.35);
+  }
+}
+
+/* ── Zoom-In modifier: adds scale-in on top of .reveal's 3D fade-up ── */
+.reveal.gentle-zoom-in {
+  transform: scale(0.88) translateY(44px) rotateX(6deg);
+}
+
+.reveal.gentle-zoom-in.is-visible,
+.invitation-open-section.is-opened .reveal.gentle-zoom-in {
+  transform: scale(1) translateY(0) rotateX(0deg);
+}
+
+/* ── Slide-from-left modifier ── */
+.reveal.slide-left {
+  transform: translateX(-60px) translateY(20px) scale(0.96);
+}
+.reveal.slide-left.is-visible,
+.invitation-open-section.is-opened .reveal.slide-left {
+  transform: translateX(0) translateY(0) scale(1);
+}
+
+/* ── Slide-from-right modifier ── */
+.reveal.slide-right {
+  transform: translateX(60px) translateY(20px) scale(0.96);
+}
+.reveal.slide-right.is-visible,
+.invitation-open-section.is-opened .reveal.slide-right {
+  transform: translateX(0) translateY(0) scale(1);
+}
+
+/* ── 3D Card Flip Perspective (Global) ── */
+.flip-card-perspective {
+  perspective: 1200px;
+}
+
+.flip-card-inner {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 100%;
+  height: 100%;
+}
+
+.flip-card-perspective:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: inherit;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 28px;
+}
